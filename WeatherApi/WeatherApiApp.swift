@@ -1,17 +1,12 @@
-//
-//  WeatherApiApp.swift
-//  WeatherApi
-//
-//  Created by KC Thomas on 2/9/26.
-//
-
 import SwiftUI
 
 @main
 struct WeatherApiApp: App {
+    @StateObject var homeViewModel = HomeViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView(homeViewModel: homeViewModel)
         }
     }
 }
