@@ -14,11 +14,25 @@ struct CityView: View {
                 Text(cityDetails.weather)
             }
             Spacer()
-            Text("\(cityDetails.temperature) F")
+            let formattedTempurature = cityDetails.temperature.formatted(.number.precision(.fractionLength(1)))
+            Text("\(formattedTempurature) F")
         }
     }
 }
 
-//#Preview {
-//    CityView(.losAngeles)
-//}
+#Preview {
+    CityView(
+        CityDetails(
+            name: "Los Angeles",
+            weather: "Clear",
+            weatherDescription: "",
+            temperature: 61.893,
+            feelsLike: 0.0,
+            low: 0.0,
+            high: 0.0,
+            humidity: 0,
+            wind: 0.0,
+            rain: nil
+        )
+    )
+}

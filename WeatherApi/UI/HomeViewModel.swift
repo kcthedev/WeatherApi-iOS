@@ -35,11 +35,5 @@ class HomeViewModel: ObservableObject {
                 }
             }
         }
-        //        [
-        //            .losAngeles,
-        //            .newYork,
-        //            .sanFranciso,
-        //            .seattle
-        //        ]
     }
 }

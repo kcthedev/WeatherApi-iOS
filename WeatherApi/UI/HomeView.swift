@@ -4,10 +4,17 @@ struct HomeView: View {
     @ObservedObject var homeViewModel: HomeViewModel
     
     var body: some View {
-        List(homeViewModel.cities) { city in
-            CityView(city)
+        NavigationStack {
+            List(homeViewModel.cities) { city in
+                NavigationLink(value: city) {
+                    CityView(city)
+                }
+            }
+            .listStyle(.plain)
+            .navigationDestination(for: CityDetails.self) { cityDetails in
+                CityDetailsView(cityDetails)
+            }
         }
-        .listStyle(.plain)
     }
 }
 
