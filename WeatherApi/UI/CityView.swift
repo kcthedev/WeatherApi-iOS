@@ -14,8 +14,7 @@ struct CityView: View {
                 Text(cityDetails.weather)
             }
             Spacer()
-            let formattedTempurature = cityDetails.temperature.formatted(.number.precision(.fractionLength(1)))
-            Text("\(formattedTempurature) F")
+            Text("\(cityDetails.temperature.truncateDecimals(1)) F")
         }
     }
 }

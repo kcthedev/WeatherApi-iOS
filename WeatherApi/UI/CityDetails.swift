@@ -6,7 +6,7 @@ struct CityDetails: Identifiable, Hashable {
     let feelsLike: Double
     let low: Double
     let high: Double
-    let humidity: Int
+    let humidity: Double
     let wind: Double
     let rain: Double?
 }

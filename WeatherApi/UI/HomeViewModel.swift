@@ -24,14 +24,14 @@ class HomeViewModel: ObservableObject {
                         feelsLike: response.main.feelsLike,
                         low: response.main.tempMin,
                         high: response.main.tempMax,
-                        humidity: response.main.humidity,
+                        humidity: Double(response.main.humidity), // API returns Int, but use Double for convenience
                         wind: response.wind.speed,
                         rain: response.rain?.oneHour
                     )
                     
                     cities.append(cityDetails)
                 } catch {
-                    print("error occurred: \(error)")
+                    print("An error occurred: \(error)")
                 }
             }
         }
