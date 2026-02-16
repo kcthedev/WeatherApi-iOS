@@ -13,21 +13,10 @@ class HomeViewModel: ObservableObject {
 
     private func fetchCities() {
         Task {
-            for city in City.allCases {
+            for city in CityRequest.allCases {
                 do {
                     let response = try await service.fetchWeatherForCity(city)
-                    let cityDetails = CityDetails(
-                        name: city.friendlyName,
-                        weather: response.weather[0].main,
-                        weatherDescription: response.weather[0].description,
-                        temperature: response.main.temp,
-                        feelsLike: response.main.feelsLike,
-                        low: response.main.tempMin,
-                        high: response.main.tempMax,
-                        humidity: Double(response.main.humidity), // API returns Int, but use Double for convenience
-                        wind: response.wind.speed,
-                        rain: response.rain?.oneHour
-                    )
+                    let cityDetails = response.toCityDetails(city.friendlyName)
                     
                     cities.append(cityDetails)
                 } catch {

@@ -2,7 +2,8 @@ protocol CityData {
     var data: (name: String, lat: Double, lon: Double) { get }
 }
 
-enum City: CityData, Identifiable, CaseIterable {
+// In an actual, real-world project, call a remote service and allow user to enter an arbitrary city in a TextField
+enum CityRequest: CityData, Identifiable, CaseIterable {
     case losAngeles
     case newYork
     case sanFranciso
