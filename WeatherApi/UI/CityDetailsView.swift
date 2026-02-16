@@ -2,16 +2,11 @@ import SwiftUI
 
 struct CityDetailsView: View {
     let details: CityDetails
+    private let background: Background
     
     init(_ details: CityDetails) {
         self.details = details
-    }
-    
-    private var isBackgroundDark: Bool {
-        switch details.weather {
-        case "Clear": true
-        default: false
-        }
+        self.background = Background(details: details)
     }
     
     var body: some View {
@@ -28,10 +23,21 @@ struct CityDetailsView: View {
             }
             Spacer()
         }
-        .background(background)
-        .foregroundColor(isBackgroundDark ? .white : .black)
+        .background(
+            Image(background.imageResource)
+                .ignoresSafeArea()
+        )
+        .foregroundColor(background.overlayColor)
         .padding()
-        .navigationTitle(details.name)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(details.name)
+                    .font(.headline)
+                    .foregroundColor(background.overlayColor)
+            }
+        }
+        .navigationTitle(details.name, background.overlayColor)
     }
     
     @ViewBuilder
@@ -64,15 +70,24 @@ struct CityDetailsView: View {
             }
         }
     }
-    
-    @ViewBuilder
-    private var background: some View {
-        let resource = switch details.weather {
-        case "Clear": "clear"
-        case "Clouds": "clouds"
-        default: "snow"
+
+    private struct Background {
+        let details: CityDetails
+        
+        var imageResource: String {
+            switch details.weather {
+            case "Clear": "clear"
+            case "Clouds": "clouds"
+            default: "snow"
+            }
         }
-        Image(resource)
-            .ignoresSafeArea()
+        
+        var overlayColor: Color {
+            switch details.weather {
+            case "Clear": .white
+            case "Clouds": .black
+            default: .black
+            }
+        }
     }
 }
